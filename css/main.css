@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #ffc905;
+    background: #ffff2b;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2694,4 +2694,26 @@ header.header {
   .comments {
     padding: 10px 12px;
   }
+}
+/* 自定义“阅读全文”按钮样式 */
+.post-button {
+  margin-top: 30px; /* 距离上方文字的距离 */
+  text-align: center; /* 按钮居中，如果你喜欢居左可以删掉这行 */
+}
+.post-button .btn {
+  background: #333; /* 按钮背景颜色 */
+  color: #fff; /* 按钮文字颜色 */
+  font-size: 14px; /* 字体大小 */
+  border: 2px solid #333; /* 边框 */
+  border-radius: 20px; /* 圆角，数值越大按钮越圆 */
+  padding: 5px 20px; /* 按钮内边距（上下 左右） */
+  transition: all 0.3s; /* 动画过渡时间 */
+}
+/* 鼠标划过按钮时的效果 */
+.post-button .btn:hover {
+  background: #fff; /* 划过时背景变白 */
+  color: #333; /* 划过时文字变黑 */
+  border-color: #333; /* 边框颜色保持 */
+  text-decoration: none;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* 增加一点阴影感 */
 }
