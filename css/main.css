@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #b35985;
+    background: #71dddb;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2701,8 +2701,8 @@ header.header {
   text-align: center; /* 按钮居中，如果你喜欢居左可以删掉这行 */
 }
 .post-button .btn {
-  background: #333; /* 按钮背景颜色 */
-  color: #fff; /* 按钮文字颜色 */
+  background: #fff; /* 按钮背景颜色 */
+  color: #333; /* 按钮文字颜色 */
   font-size: 14px; /* 字体大小 */
   border: 2px solid #333; /* 边框 */
   border-radius: 20px; /* 圆角，数值越大按钮越圆 */
@@ -2711,9 +2711,15 @@ header.header {
 }
 /* 鼠标划过按钮时的效果 */
 .post-button .btn:hover {
-  background: #fff; /* 划过时背景变白 */
-  color: #333; /* 划过时文字变黑 */
+  background: #333; /* 划过时背景变白 */
+  color: #fff; /* 划过时文字变黑 */
   border-color: #333; /* 边框颜色保持 */
   text-decoration: none;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* 增加一点阴影感 */
+}
+/* 强制替换阅读全文图标为小飞机 */
+.post-button .btn i.fa-angle-double-right::before {
+  content: "\f1d8"; /* 这是 Font Awesome 中纸飞机的代码 */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
 }
