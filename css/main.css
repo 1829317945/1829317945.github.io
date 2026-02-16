@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #4fffff;
+    background: #fffa3b;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2721,4 +2721,12 @@ header.header {
   content: "\f1d8"; /* 这是 Font Awesome 中纸飞机的代码 */
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
+}
+/* 让主体内容区域半透明 */
+.main-inner {
+  background: rgba(255,255,255,0.7) !important;
+}
+/* 如果侧边栏也挡住了，可以加这个 */
+.sidebar {
+  background: rgba(255,255,255,0.7) !important;
 }
