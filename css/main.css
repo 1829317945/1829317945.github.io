@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #d6fffa;
+    background: #3eff8f;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2715,10 +2715,4 @@ header.header {
   border-color: #333; /* 边框颜色保持 */
   text-decoration: none;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* 增加一点阴影感 */
-}
-/* 强制替换阅读全文图标为小飞机 */
-.post-button .btn i.fa-angle-double-right::before {
-  content: "\f1d8"; /* 这是 Font Awesome 中纸飞机的代码 */
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
 }
