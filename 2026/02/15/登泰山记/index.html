@@ -16,8 +16,9 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
     <meta name="description" content="以后可能会去很多地方,看很多次日出,但再不会有那天的山和那样的日出了.">
 <meta property="og:type" content="article">
@@ -27,9 +28,9 @@
 <meta property="og:description" content="以后可能会去很多地方,看很多次日出,但再不会有那天的山和那样的日出了.">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s41.ax1x.com/2026/02/15/pZLwV7n.jpg">
-<meta property="og:image" content="https://s41.ax1x.com/2025/12/23/pZ8RYI1.jpg">
+<meta property="og:image" content="http://example.com/images/posts/richu.webp">
 <meta property="article:published_time" content="2026-02-15T06:25:58.000Z">
-<meta property="article:modified_time" content="2026-02-15T07:05:23.530Z">
+<meta property="article:modified_time" content="2026-02-18T13:57:49.833Z">
 <meta property="article:author" content="Du Yansong">
 <meta property="article:tag" content="旅行">
 <meta name="twitter:card" content="summary">
@@ -54,12 +55,15 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
 <script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
 
   
 
 
 
+  <script src="/js/third-party/fancybox.js" defer></script>
 
 
 
@@ -153,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -230,9 +234,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2026-02-15 14:25:58 / 修改时间：15:05:23" itemprop="dateCreated datePublished" datetime="2026-02-15T14:25:58+08:00">2026-02-15</time>
+      <time title="创建时间：2026-02-15 14:25:58" itemprop="dateCreated datePublished" datetime="2026-02-15T14:25:58+08:00">2026-02-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-18 21:57:49" itemprop="dateModified" datetime="2026-02-18T21:57:49+08:00">2026-02-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -261,8 +271,8 @@
 <p>落地泰山站,刚出站口就遥遥地看到泰山,像一条巨龙横亘在华北平原上,中午去当地有名的古城吃了顿饭,由于那天走的路已经够多了怕当天进山的话累趴在半路,索性把爬山定在第二天,下午总得找点事干吧,先是去岱庙逛了逛,泰山的风景和高度在五岳中并不突出但为什么能成为天下第一名山,五岳独尊很大程度是因为它厚重的历史文化底蕴,岱庙是以前皇帝封禅的行宫,里面的碑刻和天贶殿让我印象深刻,离开岱庙后又去了普照寺,之后本来兴致冲冲的去当地的一个广场看音乐喷泉,过去了才得知因为山东中考而取消了,恰巧又赶上大雨,于是只能打车找了离泰山近的一家酒店住下,晚上去吃了当地很有名的炒鸡,泰安的饭量实在是多,实惠极了,我俩就点了两个菜,有一个菜几乎没动筷子,带回去正好明天早上吃.第二天起了个大早,我俩出去喝了当地的特色早餐—糁汤,从来没有吃过那么好吃的早餐,可能这次旅行的经历随着时间流逝很多东西会变得模糊,但那碗糁汤入口的瞬间给我带来的那种安逸的感觉实在是久久难以忘怀,只是自离开山东后就没再见过了.</p>
 <p>本来按计划是要夜爬来着,又凉快又能刚好看到日出不用在山顶上等候太久,但想了想,那样的话会错过路上的很多风景,于是折中了一下决定下午不太热的时候进山.中午实在是等不及了,走吧,慢慢爬,去山里歇着吧.从红门游客中心出发了,爬到中天门的时候停下来,照相,吃东西,待了几个小时,夜色渐浓,”走吧,直接冲顶”.走着走着,下起了淅淅沥沥的小雨,淋着雨,听着歌,看着人来人往,想到一路上遇到的腿疼的直叫唤下山的人,平凡却伟大的挑山工,说说笑笑的年轻人们.这样的十八岁,有且仅有一次的十八岁.</p>
 <p>南天门就在眼前,看着模糊的轮廓一开始竟有点难以置信,十八盘也没有网上说的那么夸张,不知不觉也就走完了.拾阶而上是天街,中国人是很会起名字的,”天街”一听就给人一种很诗意的感觉,让我想起了小时候学的天上的街市,从山顶俯瞰,泰安城尽收眼底,像看导航一样,灯火通明,一条条街道公路清晰可见,旁边的群山都显得有些渺小了,难怪孔子写下”登泰山而小天下”,我今天走的路也许杜甫曾经也走过,同样是正值壮年,人家写下”会当凌绝顶,一览众山小”,雄浑的气势让后代诗人难以企及,而我的心志似乎已有点被磨平了.</p>
-<p><div align="center"><br><a target="_blank" rel="noopener" href="https://imgchr.com/i/pZLwV7n"><img src="https://s41.ax1x.com/2026/02/15/pZLwV7n.jpg" alt="pZLwV7n.jpg" width="70%" border="0" /></a></p>
-<p>寒风实在难捱,没办法只能租了个大衣.听着我今年最喜欢的唯一等日出,日出前的那半个小时最难熬,焦急中掺杂着激动,”出来了,出来了”人群中传来喊声,天逐渐泛起红晕,又有点发黄,与眼前的山,河交相辉映,不知道是不是姚鼐&lt;&lt;登泰山记&gt;&gt;中写的汶水,徂徕山.一点,一点,太阳慢慢升起,直到完全显现出圆形的模样,不登高看一次日出光凭想象怎么能体会到”日上,正赤如丹,下有红光动摇承之”,读课文时以为这有些夸张,带点浪漫主义的色彩,那天早上才明白古人诚不欺我,那种红,红的刺眼,像把眼睛凑近以前的那种灯泡跟前.金光披撒在山峦人群中,带来好运,也带来蓬勃的生命力.<br><a target="_blank" rel="noopener" href="https://imgchr.com/i/pZ8RYI1"><img src="https://s41.ax1x.com/2025/12/23/pZ8RYI1.jpg" alt="pZ8RYI1.jpg" width="70%" border="0" /></a></p>
+<p><div align="center"><br><a target="_blank" rel="noopener" href="https://imgchr.com/i/pZLwV7n"><img data-src="https://s41.ax1x.com/2026/02/15/pZLwV7n.jpg" alt="pZLwV7n.jpg" width="70%" border="0" /></a></p>
+<p>寒风实在难捱,没办法只能租了个大衣.听着我今年最喜欢的唯一等日出,日出前的那半个小时最难熬,焦急中掺杂着激动,”出来了,出来了”人群中传来喊声,天逐渐泛起红晕,又有点发黄,与眼前的山,河交相辉映,不知道是不是姚鼐&lt;&lt;登泰山记&gt;&gt;中写的汶水,徂徕山.一点,一点,太阳慢慢升起,直到完全显现出圆形的模样,不登高看一次日出光凭想象怎么能体会到”日上,正赤如丹,下有红光动摇承之”,读课文时以为这有些夸张,带点浪漫主义的色彩,那天早上才明白古人诚不欺我,那种红,红的刺眼,像把眼睛凑近以前的那种灯泡跟前.金光披撒在山峦人群中,带来好运,也带来蓬勃的生命力.<br><img data-src="/images/posts/richu.webp" alt="日出"></p>
 <p>以后可能会去很多地方,看很多次日出,但再不会有那天的山和那样的日出了.</p>
 
     </div>
@@ -285,9 +295,6 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2026/02/15/%E6%9C%AC%E6%9D%B0%E6%98%8E%E5%B7%B4%E9%A1%BF%E5%A5%87%E4%BA%8B%E5%BD%B1%E8%AF%84/" rel="next" title="本杰明巴顿奇事影评">
-                  本杰明巴顿奇事影评 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
