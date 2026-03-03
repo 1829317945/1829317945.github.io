@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #7cf6ff;
+    background: #ffffd2;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2733,14 +2733,10 @@ body {
   position: relative;
   overflow: hidden;
 }
-/* 遮罩层 */
-.site-brand-container::before,
-.site-meta::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.35); /* 稍微加深遮罩，突出白色文字 */
-  z-index: 0;
+.site-meta {
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 /* 2. 标题文字 & 打字机效果 */
 .site-title {
