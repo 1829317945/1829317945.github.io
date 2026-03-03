@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #ffffd2;
+    background: #90791b;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2764,6 +2764,21 @@ body {
   position: relative;
   z-index: 1;
   color: rgba(255,255,255,0.8) !important;
+}
+/* ===== 全站大背景图设置 ===== */
+body {
+  background: url("/images/body-bg.jpg"); /* 指向你上传的图片 */
+  background-attachment: fixed; /* 背景固定，不随页面滚动，更有高级感 */
+  background-repeat: no-repeat; /* 背景不重复 */
+  background-position: center; /* 背景居中 */
+  background-size: cover; /* 背景自动缩放铺满全屏 */
+}
+/* 可选：为了防止背景图太乱影响阅读，给内容区加一个半透明白底 */
+.main-inner {
+  background: rgba(255,255,255,0.9); /* 0.9 是不透明度，数值越小越透明 */
+  padding: 40px; /* 内容区内边距 */
+  border-radius: 10px; /* 圆角效果 */
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 淡淡的阴影，增加层次感 */
 }
 @keyframes gradientBG {
   0% {
