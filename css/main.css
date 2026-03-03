@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #ff1214;
+    background: #2dffff;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2721,6 +2721,39 @@ body {
   background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #203a43);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
+}
+/* ===== 松霖小屋 · 文艺雪山风 ===== */
+/* 顶部背景 */
+.sidebar .site-meta {
+  background: url("/images/sidebar-bg.jpg") no-repeat center center !important;
+  background-size: cover !important;
+  padding: 80px 20px !important;
+  position: relative;
+  overflow: hidden;
+}
+/* 柔和遮罩 */
+.sidebar .site-meta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.28);
+}
+/* 标题样式 */
+.sidebar .site-title {
+  font-family: "LXGW WenKai Screen", serif !important;
+  font-size: 24px;
+  letter-spacing: 3px;
+  color: #fff !important;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  position: relative;
+  z-index: 2;
+}
+/* 副标题 */
+.sidebar .site-subtitle {
+  font-family: "LXGW WenKai Screen", serif !important;
+  color: rgba(255,255,255,0.85) !important;
+  position: relative;
+  z-index: 2;
 }
 @keyframes gradientBG {
   0% {
