@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #ccaf87;
+    background: #70ff98;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2772,6 +2772,8 @@ body {
   background-repeat: no-repeat; /* 背景不重复 */
   background-position: center; /* 背景居中 */
   background-size: cover; /* 背景自动缩放铺满全屏 */
+  animation: none !important; /* 强制禁用所有动画 */
+  transform: none !important; /* 强制禁用所有位移变换 */
 }
 /* 可选：为了防止背景图太乱影响阅读，给内容区加一个半透明白底 */
 .main-inner {
