@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #2dffff;
+    background: #7cf6ff;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2722,38 +2722,52 @@ body {
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
 }
-/* ===== 松霖小屋 · 文艺雪山风 ===== */
-/* 顶部背景 */
-.sidebar .site-meta {
+/* ===== 松霖小屋 · 文艺雪山风优化版 ===== */
+/* ===== 松霖小屋 · 极简雪山风 + 打字机动画方案 ===== */
+/* 1. 紧凑背景区域：恢复原版大小 */
+.site-brand-container,
+.site-meta {
   background: url("/images/sidebar-bg.jpg") no-repeat center center !important;
   background-size: cover !important;
-  padding: 80px 20px !important;
+  padding: 25px 15px !important; /* 进一步调小，接近原版高度 */
   position: relative;
   overflow: hidden;
 }
-/* 柔和遮罩 */
-.sidebar .site-meta::before {
+/* 遮罩层 */
+.site-brand-container::before,
+.site-meta::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.28);
+  background: rgba(0,0,0,0.35); /* 稍微加深遮罩，突出白色文字 */
+  z-index: 0;
 }
-/* 标题样式 */
-.sidebar .site-title {
-  font-family: "LXGW WenKai Screen", serif !important;
-  font-size: 24px;
-  letter-spacing: 3px;
+/* 2. 标题文字 & 打字机效果 */
+.site-title {
+  position: relative;
+  z-index: 1;
+/* 更改为思源宋体，若未加载则回退到衬线体 */
+  font-family: "Noto Serif SC", serif !important;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 2px;
   color: #fff !important;
-  text-shadow: 0 4px 12px rgba(0,0,0,0.35);
-  position: relative;
-  z-index: 2;
+/* --- 打字机动画核心 --- */
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid rgba(255,255,255,0.75); /* 柔和的光标 */
+  width: 0;
+/* steps(4) 对应“松霖小屋”四个字，3s 是动画总时长 */
+  animation: typing 3s steps(4, end) forwards, blink-caret 0.75s step-end infinite;
 }
-/* 副标题 */
-.sidebar .site-subtitle {
-  font-family: "LXGW WenKai Screen", serif !important;
-  color: rgba(255,255,255,0.85) !important;
+/* 打字动画：宽度从 0 到 100% */
+/* 光标闪烁动画 */
+/* 3. 副标题优化 (可选) */
+.site-subtitle {
   position: relative;
-  z-index: 2;
+  z-index: 1;
+  color: rgba(255,255,255,0.8) !important;
 }
 @keyframes gradientBG {
   0% {
@@ -2764,5 +2778,21 @@ body {
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #fff;
   }
 }
