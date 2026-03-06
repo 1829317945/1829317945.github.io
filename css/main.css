@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #ad017c;
+    background: #ff4d81;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2727,7 +2727,7 @@ body {
 /* 1. 紧凑背景区域：恢复原版大小 */
 .site-brand-container,
 .site-meta {
-  background: url("/images/sidebar-bg.jpg") no-repeat center center !important;
+  background: url("/images/sidebar-bg.webp") no-repeat center center !important;
   background-size: cover !important;
   padding: 25px 15px !important; /* 进一步调小，接近原版高度 */
   position: relative;
@@ -2767,7 +2767,7 @@ body {
 }
 /* ===== 全站大背景图设置 ===== */
 body {
-  background: url("/images/body-bg.jpg"); /* 指向你上传的图片 */
+  background: url("/images/body-bg.webp"); /* 指向你上传的图片 */
   background-attachment: fixed; /* 背景固定，不随页面滚动，更有高级感 */
   background-repeat: no-repeat; /* 背景不重复 */
   background-position: center; /* 背景居中 */
