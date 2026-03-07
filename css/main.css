@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #ff417e;
+    background: #63d62e;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2781,6 +2781,17 @@ body {
   padding: 40px; /* 内容区内边距 */
   border-radius: 10px; /* 圆角效果 */
   box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 淡淡的阴影，增加层次感 */
+}
+/* 强制看板娘对话框高度自适应，防止文字被切断 */
+#live2d-msgs {
+  height: auto !important; /* 撤销固定高度 */
+  min-height: 80px !important; /* 保证有一个基础高度 */
+  max-height: 300px !important; /* 防止长篇文学作品撑爆屏幕 */
+  overflow: visible !important; /* 确保超出部分可见 */
+  line-height: 1.6 !important; /* 优化行间距，阅读更舒适 */
+  padding: 10px 15px !important; /* 增加内边距防止文字贴边 */
+  overflow-wrap: break-word; /* 自动换行 */
+  bottom: 310px !important; /* 向上微调位置，避免遮挡看板娘头部 */
 }
 @keyframes gradientBG {
   0% {
