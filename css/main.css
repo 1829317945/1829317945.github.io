@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #ab5783;
+    background: #71ecb0;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2782,6 +2782,65 @@ body {
   border-radius: 10px; /* 圆角效果 */
   box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 淡淡的阴影，增加层次感 */
 }
+/* --- 仅针对手机端的优化开始 --- */
+@media (max-width: 767px) {
+  body {
+    background: #f5f7f9; /* 给背景一个浅灰色，衬托白色卡片 */
+  }
+  .post-block {
+    margin: 12px 10px 20px !important; /* 卡片与屏幕边缘留点空隙 */
+    padding: 20px 15px !important;
+    border-radius: 16px !important; /* 圆角增加亲和力 */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important; /* 极轻的阴影 */
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px); /* 磨砂玻璃效果 */
+  }
+  .post-title {
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    line-height: 1.4;
+    margin-bottom: 15px;
+    text-align: center; /* 手机端居中对齐更有视觉重心 */
+  }
+  .post-meta {
+    font-size: 0.75rem !important;
+    justify-content: center; /* 居中显示 */
+    margin-bottom: 20px !important;
+    color: #999;
+  }
+  .post-meta-item {
+    margin-right: 8px !important;
+  }
+  .post-body {
+    font-size: 0.95rem !important;
+    line-height: 1.8 !important; /* 增加行间距，防止文字堆垒 */
+    color: #444;
+    text-align: justify; /* 两端对齐，看起来更整齐 */
+  }
+  .post-button {
+    text-align: center;
+    margin-top: 25px;
+  }
+  .post-button .btn {
+    background: #333 !important; /* 变成实心按钮，更容易点击 */
+    color: #fff !important;
+    border: none !important;
+    padding: 8px 30px !important;
+    border-radius: 25px !important; /* 胶囊形状 */
+    font-size: 0.9rem !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+  .header-inner {
+    padding: 60px 0 30px !important; /* 缩小顶部留白 */
+  }
+  .site-title {
+    font-size: 1.5rem !important;
+  }
+  .post-description {
+    display: none; /* 如果你觉得摘要太乱，可以隐藏描述 */
+  }
+}
+/* --- 仅针对手机端的优化结束 --- */
 @keyframes gradientBG {
   0% {
     background-position: 0% 50%;
