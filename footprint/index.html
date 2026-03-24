@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="地图加载中...     (function() {   const initMap &#x3D; () &#x3D;&gt; {     const container &#x3D; document.getElementById(&#39;map-container&#39;);     const loading &#x3D; document.getElementById(&#39;map-loading&#39;);     if (!container |">
+    <meta name="description" content="地图加载中...     &#x2F;&#x2F; 如果 jsdelivr 加载失败，尝试使用 unpkg if (typeof echarts &#x3D;&#x3D;&#x3D; &#39;undefined&#39;) {   document.write(&#39;&#39;); }   (function() {   const initMap &#x3D; () &#x3D;&gt; {     const container &#x3D; document.getElementById(&#39;ma">
 <meta property="og:type" content="website">
 <meta property="og:title" content="足迹">
 <meta property="og:url" content="http://example.com/footprint/index.html">
 <meta property="og:site_name" content="松霖小屋">
-<meta property="og:description" content="地图加载中...     (function() {   const initMap &#x3D; () &#x3D;&gt; {     const container &#x3D; document.getElementById(&#39;map-container&#39;);     const loading &#x3D; document.getElementById(&#39;map-loading&#39;);     if (!container |">
+<meta property="og:description" content="地图加载中...     &#x2F;&#x2F; 如果 jsdelivr 加载失败，尝试使用 unpkg if (typeof echarts &#x3D;&#x3D;&#x3D; &#39;undefined&#39;) {   document.write(&#39;&#39;); }   (function() {   const initMap &#x3D; () &#x3D;&gt; {     const container &#x3D; document.getElementById(&#39;ma">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-24T12:55:32.000Z">
-<meta property="article:modified_time" content="2026-03-24T13:27:09.400Z">
+<meta property="article:modified_time" content="2026-03-24T13:31:49.575Z">
 <meta property="article:author" content="Du Yansong">
 <meta name="twitter:card" content="summary">
 
@@ -223,6 +223,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 <script>
+// 如果 jsdelivr 加载失败，尝试使用 unpkg
+if (typeof echarts === 'undefined') {
+  document.write('<script src="https://unpkg.com/echarts@5.4.3/dist/echarts.min.js"><\/script>');
+}
+</script>
+<script>
 (function() {
   const initMap = () => {
     const container = document.getElementById('map-container');
@@ -274,26 +280,14 @@
 
     const chart = echarts.init(container);
 
-    // 使用更通用的地图数据源，增加备用方案
-    const geoUrls = [
-      'https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json',
-      'https://cdn.jsdelivr.net/gh/apache/echarts-examples@gh-pages/public/data/asset/geo/china.json'
-    ];
-
-    const fetchGeoData = (urls) => {
-      return fetch(urls[0]).then(res => {
-        if (!res.ok) throw new Error('CDN1 failed');
-        return res.json();
-      }).catch(err => {
-        if (urls.length > 1) return fetchGeoData(urls.slice(1));
-        throw err;
-      });
-    };
-
+    // 绝对可靠方案：加载本地 china.json 数据
     Promise.all([
-      fetchGeoData(geoUrls),
+      fetch('./china.json').then(res => {
+        if (!res.ok) throw new Error('china.json not found (404)');
+        return res.json();
+      }),
       fetch('./data.json').then(res => {
-        if (!res.ok) throw new Error('Data file not found (404)');
+        if (!res.ok) throw new Error('data.json not found (404)');
         return res.json();
       })
     ]).then(([chinaJson, footprints]) => {
