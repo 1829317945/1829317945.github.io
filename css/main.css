@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #28ff59;
+    background: #639aff;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2781,6 +2781,51 @@ body {
   padding: 40px; /* 内容区内边距 */
   border-radius: 10px; /* 圆角效果 */
   box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 淡淡的阴影，增加层次感 */
+}
+/* 仅针对手机端 (屏幕宽度小于 767px) */
+@media (max-width: 767px) {
+  body {
+    background: #fff !important;
+    background-image: none !important; /* 覆盖掉全局的雪山背景 */
+  }
+  .post-block {
+    margin: 10px 2% 20px 2% !important; /* 左右仅留 2% 的间隙 */
+    padding: 15px 10px !important; /* 内部填充微调 */
+    width: 96% !important; /* 强制占满绝大部分宽度 */
+    border-radius: 4px !important; /* 宽屏配小圆角更干练 */
+    box-shadow: none !important; /* 去掉阴影，减少视觉负担 */
+    border-bottom: 1px solid #f0f0f0; /* 用极淡的线条分隔，代替卡片感 */
+    background: #fff !important;
+  }
+  .header-inner {
+    padding: 20px 0 !important;
+    background: #fff !important;
+  }
+  .post-title {
+    font-size: 1.2rem !important;
+    text-align: left !important;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .post-body {
+    text-align: justify; /* 两端对齐，适合宽屏 */
+    line-height: 1.8; /* 增加阅读舒适度 */
+    font-size: 15px;
+  }
+  .posts-expand .post-eof {
+    display: none !important;
+  }
+  .post-button {
+    text-align: left;
+    margin-top: 15px;
+  }
+  .post-button .btn {
+    border: 1px solid #ddd !important;
+    background: none !important;
+    color: #666 !important;
+    padding: 5px 15px;
+    border-radius: 4px;
+  }
 }
 @keyframes gradientBG {
   0% {
