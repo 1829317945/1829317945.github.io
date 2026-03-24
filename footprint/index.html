@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="(function() {   const cityCoords &#x3D; {     &#39;泰安&#39;: [117.129, 36.1949],     &#39;成都&#39;: [104.0665, 30.5723],     &#39;北京&#39;: [116.4074, 39.9042],     &#39;上海&#39;: [121.4737, 31.2304],     &#39;广州&#39;: [113.2644, 23.1291],     &#39;">
+    <meta name="description" content="地图加载中...     (function() {   const initMap &#x3D; () &#x3D;&gt; {     const container &#x3D; document.getElementById(&#39;map-container&#39;);     const loading &#x3D; document.getElementById(&#39;map-loading&#39;);     if (!container |">
 <meta property="og:type" content="website">
 <meta property="og:title" content="足迹">
 <meta property="og:url" content="http://example.com/footprint/index.html">
 <meta property="og:site_name" content="松霖小屋">
-<meta property="og:description" content="(function() {   const cityCoords &#x3D; {     &#39;泰安&#39;: [117.129, 36.1949],     &#39;成都&#39;: [104.0665, 30.5723],     &#39;北京&#39;: [116.4074, 39.9042],     &#39;上海&#39;: [121.4737, 31.2304],     &#39;广州&#39;: [113.2644, 23.1291],     &#39;">
+<meta property="og:description" content="地图加载中...     (function() {   const initMap &#x3D; () &#x3D;&gt; {     const container &#x3D; document.getElementById(&#39;map-container&#39;);     const loading &#x3D; document.getElementById(&#39;map-loading&#39;);     if (!container |">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-24T12:55:32.000Z">
-<meta property="article:modified_time" content="2026-03-24T12:57:03.033Z">
+<meta property="article:modified_time" content="2026-03-24T13:07:32.331Z">
 <meta property="article:author" content="Du Yansong">
 <meta name="twitter:card" content="summary">
 
@@ -217,173 +217,174 @@
       
       
       <div class="post-body">
-          <div id="map-container" style="width: 100%; height: 600px; background: #0b1222; border-radius: 8px;"></div>
+          <div id="map-container" style="width: 100%; height: 600px; background: #0b1222; border-radius: 8px; position: relative;">
+  <div id="map-loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #409eff;">地图加载中...</div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 <script>
 (function() {
-  const cityCoords = {
-    '泰安': [117.129, 36.1949],
-    '成都': [104.0665, 30.5723],
-    '北京': [116.4074, 39.9042],
-    '上海': [121.4737, 31.2304],
-    '广州': [113.2644, 23.1291],
-    '深圳': [114.0579, 22.5431],
-    '杭州': [120.1536, 30.2874],
-    '南京': [118.7965, 32.0603],
-    '武汉': [114.3054, 30.5931],
-    '西安': [108.9402, 34.3416],
-    '重庆': [106.5516, 29.5630],
-    '长沙': [112.9388, 28.2282],
-    '苏州': [120.5853, 31.2989],
-    '天津': [117.2010, 39.0842],
-    '郑州': [113.6253, 34.7466],
-    '济南': [117.0009, 36.6758],
-    '青岛': [120.3826, 36.0671],
-    '大连': [121.6147, 38.9140],
-    '厦门': [118.1102, 24.4905],
-    '福州': [119.3062, 26.0753],
-    '昆明': [102.7123, 25.0406],
-    '贵阳': [106.7135, 26.5783],
-    '海口': [110.3312, 20.0319],
-    '南宁': [108.3200, 22.8240],
-    '南昌': [115.8921, 28.6765],
-    '合肥': [117.2272, 31.8206],
-    '沈阳': [123.4294, 41.7943],
-    '长春': [125.3235, 43.8171],
-    '哈尔滨': [126.6425, 45.7569],
-    '石家庄': [114.5149, 38.0423],
-    '太原': [112.5489, 37.8706],
-    '呼和浩特': [111.7519, 40.8415],
-    '银川': [106.2309, 38.4872],
-    '兰州': [103.8236, 36.0581],
-    '西宁': [101.7782, 36.6171],
-    '拉萨': [91.1322, 29.6604],
-    '乌鲁木齐': [87.6177, 43.7928],
-    '台北': [121.5654, 25.0330],
-    '香港': [114.1734, 22.3193],
-    '澳门': [113.5439, 22.1912]
-  };
+  const initMap = () => {
+    const container = document.getElementById('map-container');
+    const loading = document.getElementById('map-loading');
+    if (!container || !window.echarts) return;
 
-  const chart = echarts.init(document.getElementById('map-container'));
+    const cityCoords = {
+      '泰安': [117.129, 36.1949],
+      '成都': [104.0665, 30.5723],
+      '北京': [116.4074, 39.9042],
+      '上海': [121.4737, 31.2304],
+      '广州': [113.2644, 23.1291],
+      '深圳': [114.0579, 22.5431],
+      '杭州': [120.1536, 30.2874],
+      '南京': [118.7965, 32.0603],
+      '武汉': [114.3054, 30.5931],
+      '西安': [108.9402, 34.3416],
+      '重庆': [106.5516, 29.5630],
+      '长沙': [112.9388, 28.2282],
+      '苏州': [120.5853, 31.2989],
+      '天津': [117.2010, 39.0842],
+      '郑州': [113.6253, 34.7466],
+      '济南': [117.0009, 36.6758],
+      '青岛': [120.3826, 36.0671],
+      '大连': [121.6147, 38.9140],
+      '厦门': [118.1102, 24.4905],
+      '福州': [119.3062, 26.0753],
+      '昆明': [102.7123, 25.0406],
+      '贵阳': [106.7135, 26.5783],
+      '海口': [110.3312, 20.0319],
+      '南宁': [108.3200, 22.8240],
+      '南昌': [115.8921, 28.6765],
+      '合肥': [117.2272, 31.8206],
+      '沈阳': [123.4294, 41.7943],
+      '长春': [125.3235, 43.8171],
+      '哈尔滨': [126.6425, 45.7569],
+      '石家庄': [114.5149, 38.0423],
+      '太原': [112.5489, 37.8706],
+      '呼和浩特': [111.7519, 40.8415],
+      '银川': [106.2309, 38.4872],
+      '兰州': [103.8236, 36.0581],
+      '西宁': [101.7782, 36.6171],
+      '拉萨': [91.1322, 29.6604],
+      '乌鲁木齐': [87.6177, 43.7928],
+      '台北': [121.5654, 25.0330],
+      '香港': [114.1734, 22.3193],
+      '澳门': [113.5439, 22.1912]
+    };
 
-  fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
-    .then(res => res.json())
-    .then(chinaJson => {
+    const chart = echarts.init(container);
+
+    // 使用更通用的地图数据源
+    Promise.all([
+      fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json').then(res => res.json()),
+      fetch('/footprint/data.json').then(res => res.json())
+    ]).then(([chinaJson, footprints]) => {
+      loading.style.display = 'none';
       echarts.registerMap('china', chinaJson);
 
-      fetch('./data.json')
-        .then(res => res.json())
-        .then(footprints => {
-          const data = Object.keys(footprints).map(city => {
-            const coord = cityCoords[city];
-            if (coord) {
-              return {
-                name: city,
-                value: coord.concat(footprints[city].length),
-                posts: footprints[city]
-              };
-            }
-            return null;
-          }).filter(item => item !== null);
-
-          const option = {
-            backgroundColor: 'transparent',
-            tooltip: {
-              trigger: 'item',
-              backgroundColor: 'rgba(11, 18, 34, 0.9)',
-              borderColor: '#409eff',
-              borderWidth: 1,
-              padding: [10, 15],
-              textStyle: {
-                color: '#fff'
-              },
-              enterable: true,
-              extraCssText: 'box-shadow: 0 0 10px rgba(64, 158, 255, 0.5); z-index: 9999;',
-              formatter: function(params) {
-                const posts = params.data.posts;
-                let html = `<div style="font-size: 16px; font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid #409eff; padding-bottom: 5px;">${params.name}</div>`;
-                posts.forEach(post => {
-                  html += `<div style="margin: 8px 0;">
-                    <a href="${post.path}" style="color: #409eff; text-decoration: none; display: block;">
-                      <span style="font-size: 14px;">• ${post.title}</span>
-                      <div style="font-size: 11px; color: #888; margin-left: 12px;">${post.date}</div>
-                    </a>
-                  </div>`;
-                });
-                return html;
-              }
-            },
-            geo: {
-              map: 'china',
-              roam: true,
-              zoom: 1.2,
-              emphasis: {
-                itemStyle: {
-                  areaColor: '#1a2b4d'
-                },
-                label: {
-                  show: false
-                }
-              },
-              itemStyle: {
-                areaColor: '#101c3d',
-                borderColor: '#213a7a',
-                borderWidth: 1
-              }
-            },
-            series: [
-              {
-                name: '足迹',
-                type: 'effectScatter',
-                coordinateSystem: 'geo',
-                data: data,
-                symbolSize: function(val) {
-                  return 8 + Math.min(val[2] * 2, 15);
-                },
-                showEffectOn: 'render',
-                rippleEffect: {
-                  brushType: 'fill',
-                  scale: 3,
-                  period: 4
-                },
-                emphasis: {
-                  scale: true
-                },
-                label: {
-                  formatter: '{b}',
-                  position: 'right',
-                  show: true,
-                  color: '#fff',
-                  fontSize: 12,
-                  textShadowBlur: 2,
-                  textShadowColor: '#000'
-                },
-                itemStyle: {
-                  color: '#00f2ff',
-                  shadowBlur: 10,
-                  shadowColor: '#00f2ff'
-                },
-                zlevel: 1
-              }
-            ]
+      const data = Object.keys(footprints).map(city => {
+        const coord = cityCoords[city];
+        if (coord) {
+          return {
+            name: city,
+            value: coord.concat(footprints[city].length),
+            posts: footprints[city]
           };
+        }
+        return null;
+      }).filter(item => item !== null);
 
-          chart.setOption(option);
+      const option = {
+        backgroundColor: 'transparent',
+        tooltip: {
+          trigger: 'item',
+          backgroundColor: 'rgba(11, 18, 34, 0.9)',
+          borderColor: '#409eff',
+          borderWidth: 1,
+          padding: [10, 15],
+          textStyle: { color: '#fff' },
+          enterable: true,
+          extraCssText: 'box-shadow: 0 0 10px rgba(64, 158, 255, 0.5); z-index: 9999;',
+          formatter: function(params) {
+            const posts = params.data.posts;
+            let html = `<div style="font-size: 16px; font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid #409eff; padding-bottom: 5px;">${params.name}</div>`;
+            posts.forEach(post => {
+              html += `<div style="margin: 8px 0;">
+                <a href="${post.path}" style="color: #409eff; text-decoration: none; display: block;">
+                  <span style="font-size: 14px;">• ${post.title}</span>
+                  <div style="font-size: 11px; color: #888; margin-left: 12px;">${post.date}</div>
+                </a>
+              </div>`;
+            });
+            return html;
+          }
+        },
+        geo: {
+          map: 'china',
+          roam: true,
+          zoom: 1.2,
+          emphasis: {
+            itemStyle: { areaColor: '#1a2b4d' },
+            label: { show: false }
+          },
+          itemStyle: {
+            areaColor: '#101c3d',
+            borderColor: '#213a7a',
+            borderWidth: 1
+          }
+        },
+        series: [{
+          name: '足迹',
+          type: 'effectScatter',
+          coordinateSystem: 'geo',
+          data: data,
+          symbolSize: function(val) {
+            return 8 + Math.min(val[2] * 2, 15);
+          },
+          showEffectOn: 'render',
+          rippleEffect: {
+            brushType: 'fill',
+            scale: 3,
+            period: 4
+          },
+          emphasis: { scale: true },
+          label: {
+            formatter: '{b}',
+            position: 'right',
+            show: true,
+            color: '#fff',
+            fontSize: 12,
+            textShadowBlur: 2,
+            textShadowColor: '#000'
+          },
+          itemStyle: {
+            color: '#00f2ff',
+            shadowBlur: 10,
+            shadowColor: '#00f2ff'
+          },
+          zlevel: 1
+        }]
+      };
 
-          chart.on('click', function(params) {
-            if (params.seriesType === 'effectScatter') {
-              if (params.data.posts.length > 0) {
-                window.location.href = params.data.posts[0].path;
-              }
-            }
-          });
+      chart.setOption(option);
+      chart.on('click', function(params) {
+        if (params.seriesType === 'effectScatter' && params.data.posts.length > 0) {
+          window.location.href = params.data.posts[0].path;
+        }
+      });
 
-          window.addEventListener('resize', () => {
-            chart.resize();
-          });
-        });
+      window.addEventListener('resize', () => chart.resize());
+    }).catch(err => {
+      console.error('Map loading failed:', err);
+      loading.innerText = '地图加载失败，请检查网络或稍后重试';
     });
+  };
+
+  if (document.readyState === 'complete') {
+    initMap();
+  } else {
+    window.addEventListener('load', initMap);
+  }
 })();
 </script>
 

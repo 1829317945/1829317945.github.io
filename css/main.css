@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #639aff;
+    background: #6bf4cc;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2786,45 +2786,55 @@ body {
 @media (max-width: 767px) {
   body {
     background: #fff !important;
-    background-image: none !important; /* 覆盖掉全局的雪山背景 */
+    background-image: none !important;
   }
   .post-block {
-    margin: 10px 2% 20px 2% !important; /* 左右仅留 2% 的间隙 */
-    padding: 15px 10px !important; /* 内部填充微调 */
-    width: 96% !important; /* 强制占满绝大部分宽度 */
-    border-radius: 4px !important; /* 宽屏配小圆角更干练 */
-    box-shadow: none !important; /* 去掉阴影，减少视觉负担 */
-    border-bottom: 1px solid #f0f0f0; /* 用极淡的线条分隔，代替卡片感 */
-    background: #fff !important;
+    margin: 0 !important; /* 彻底去掉外边距 */
+    padding: 20px 15px !important; /* 仅留内部左右 15px 的呼吸感，防止文字贴边 */
+    width: 100% !important; /* 宽度 100% */
+    background: transparent !important; /* 去掉卡片背景色 */
+    box-shadow: none !important; /* 彻底去掉阴影 */
+    border-radius: 0 !important; /* 去掉圆角 */
+    border-bottom: 1px solid #eee; /* 用极细的线条优雅地分隔文章 */
   }
-  .header-inner {
-    padding: 20px 0 !important;
+  .header,
+  .header-inner,
+  .main-inner {
     background: #fff !important;
+    width: 100% !important;
   }
   .post-title {
-    font-size: 1.2rem !important;
+    font-size: 1.3rem !important; /* 标题稍微放大 */
     text-align: left !important;
-    margin-bottom: 12px;
-    font-weight: 600;
+    margin: 10px 0 !important;
+    font-weight: bold;
+    color: #222;
+  }
+  .post-meta {
+    justify-content: flex-start !important;
+    font-size: 0.75rem !important;
+    color: #999;
+    margin-bottom: 15px !important;
   }
   .post-body {
-    text-align: justify; /* 两端对齐，适合宽屏 */
-    line-height: 1.8; /* 增加阅读舒适度 */
-    font-size: 15px;
+    line-height: 1.8;
+    font-size: 16px;
+    color: #333;
+    text-align: justify;
   }
   .posts-expand .post-eof {
     display: none !important;
   }
   .post-button {
     text-align: left;
-    margin-top: 15px;
+    margin-top: 20px;
   }
   .post-button .btn {
-    border: 1px solid #ddd !important;
+    border: none !important; /* 去掉边框 */
+    padding: 0 !important; /* 去掉内边距 */
     background: none !important;
-    color: #666 !important;
-    padding: 5px 15px;
-    border-radius: 4px;
+    color: #007aff !important; /* 使用链接蓝 */
+    font-weight: 500;
   }
 }
 @keyframes gradientBG {
