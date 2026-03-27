@@ -162,7 +162,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -271,7 +271,71 @@
     
     
 
-    <footer class="post-footer">
+    <footer class="post-footer"><div class="post-like-section">
+  <button id="post-like-btn" class="post-like-button">
+    <i class="far fa-heart"></i>
+    <span id="like-count" class="like-count">0</span>
+  </button>
+</div>
+
+<script>
+(function() {
+  const likeBtn = document.getElementById('post-like-btn');
+  const countSpan = document.getElementById('like-count');
+  const heartIcon = likeBtn.querySelector('i');
+  
+  const pagePath = window.location.pathname.replace(/\//g, '_').replace(/index\.html$/, '');
+  if (pagePath === '_' || pagePath === '') return;
+
+  const namespace = 'songlin_blog_likes'; 
+  const getUrl = `https://api.countapi.xyz/get/${namespace}/${pagePath}`;
+  const hitUrl = `https://api.countapi.xyz/hit/${namespace}/${pagePath}`;
+
+  fetch(getUrl)
+    .then(res => res.json())
+    .then(data => {
+      countSpan.innerText = data.value || 0;
+    })
+    .catch(() => {
+      countSpan.innerText = 0;
+    });
+
+  if (localStorage.getItem('liked_' + pagePath)) {
+    likeBtn.classList.add('is-liked');
+    heartIcon.classList.replace('far', 'fas');
+  }
+
+  likeBtn.onclick = function() {
+    const isLiked = localStorage.getItem('liked_' + pagePath);
+    const currentCount = parseInt(countSpan.innerText) || 0;
+
+    if (!isLiked) {
+      // 1. 点亮逻辑
+      countSpan.innerText = currentCount + 1;
+      likeBtn.classList.add('is-liked');
+      heartIcon.classList.replace('far', 'fas');
+      localStorage.setItem('liked_' + pagePath, 'true');
+      
+      fetch(hitUrl)
+        .then(res => res.json())
+        .then(data => {
+          countSpan.innerText = data.value;
+        })
+        .catch(err => console.error('Like hit failed:', err));
+    } else {
+      // 2. 取消点亮逻辑（仅视觉取消，不减少云端总数以符合“一个人只能点亮一次”的统计逻辑）
+      // 如果需要云端也减少，CountAPI 不直接支持减法，通常点赞统计只增不减
+      countSpan.innerText = Math.max(0, currentCount - 1);
+      likeBtn.classList.remove('is-liked');
+      heartIcon.classList.replace('fas', 'far');
+      localStorage.removeItem('liked_' + pagePath);
+      
+      // 注意：由于 CountAPI 的限制，通常点赞统计是累积的。
+      // 这里实现的是“个人维度的点亮与取消”，再次点亮时会再次触发 hit。
+    }
+  };
+})();
+</script>
           <div class="post-tags">
               <a href="/tags/AI/" rel="tag"># AI</a>
           </div>
