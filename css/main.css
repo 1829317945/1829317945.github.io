@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #ff6;
+    background: #ffff67;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2717,12 +2717,6 @@ header.header {
   text-decoration: none;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* 增加一点阴影感 */
 }
-body {
-  background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #203a43);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
-}
-/* ===== 松霖小屋 · 文艺雪山风优化版 ===== */
 /* ===== 松霖小屋 · 极简雪山风 + 打字机动画方案 ===== */
 /* 1. 紧凑背景区域：恢复原版大小 */
 .site-brand-container,
@@ -2765,15 +2759,60 @@ body {
   z-index: 1;
   color: rgba(255,255,255,0.8) !important;
 }
-/* ===== 全站大背景图设置 ===== */
+/* ===== 点赞功能样式 ===== */
+.post-like-section {
+  text-align: center;
+  margin: 40px 0 20px;
+  display: flex;
+  justify-content: center;
+}
+.post-like-button {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  outline: none;
+  user-select: none;
+}
+.post-like-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  background: rgba(255,255,255,0.9);
+}
+.post-like-button .fa-heart {
+  color: #666;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+.post-like-button.is-liked .fa-heart {
+  color: #ff4d4d;
+  animation: heartBeat 0.6s ease;
+}
+.like-count {
+  font-size: 16px;
+  font-weight: 600;
+  color: #444;
+  min-width: 20px;
+}
+.post-like-button.is-liked .like-count {
+  color: #ff4d4d;
+}
+html,
 body {
-  background: url("/images/body-bg.webp"); /* 指向你上传的图片 */
-  background-attachment: fixed; /* 背景固定，不随页面滚动，更有高级感 */
-  background-repeat: no-repeat; /* 背景不重复 */
-  background-position: center; /* 背景居中 */
+  overflow-x: hidden; /* 严禁左右滑动 */
+  width: 100%;
+}
+body {
+  background: url("/images/body-bg.webp") no-repeat center center fixed;
   background-size: cover; /* 背景自动缩放铺满全屏 */
-  animation: none !important; /* 强制禁用所有动画 */
-  transform: none !important; /* 强制禁用所有位移变换 */
+  -webkit-backface-visibility: hidden; /* 增强固定背景稳定性 */
 }
 /* 可选：为了防止背景图太乱影响阅读，给内容区加一个半透明白底 */
 .main-inner {
@@ -2837,17 +2876,6 @@ body {
     font-weight: 500;
   }
 }
-@keyframes gradientBG {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
 @keyframes typing {
   from {
     width: 0;
@@ -2862,5 +2890,22 @@ body {
   }
   50% {
     border-color: #fff;
+  }
+}
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.3);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
   }
 }
