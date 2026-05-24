@@ -3,9 +3,16 @@ title: 足迹
 date: 2026-03-24 20:55:32
 ---
 
-<div id="map-container" style="width: 100%; height: 600px; background: #0b1222; border-radius: 8px; position: relative;">
-  <div id="map-loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #409eff;">地图加载中...</div>
+<div id="map-container" style="width: 100%; height: 620px; background: linear-gradient(180deg, #0a0f1f 0%, #0d1528 40%, #0f1a30 100%); border-radius: 12px; position: relative; overflow: hidden; box-shadow: 0 2px 20px rgba(0,0,0,0.3);">
+  <div id="map-loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #8899bb; font-size: 14px;">
+    <div style="width: 40px; height: 40px; margin: 0 auto 12px; border: 3px solid rgba(64,158,255,0.2); border-top-color: #409eff; border-radius: 50%; animation: fp-spin 0.8s linear infinite;"></div>
+    地图加载中...
+  </div>
+  <div id="map-stats" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: none; gap: 24px; z-index: 10;"></div>
 </div>
+<style>
+@keyframes fp-spin { to { transform: rotate(360deg); } }
+</style>
 
 <script src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 <script>
@@ -155,16 +162,16 @@ if (typeof echarts === 'undefined') {
             tooltip: {
               show: true,
               trigger: 'item',
-              backgroundColor: 'rgba(255, 255, 255, 0.98)',
+              backgroundColor: 'rgba(255, 255, 255, 0.97)',
               borderColor: '#409eff',
               borderWidth: 1,
               padding: 0,
-              textStyle: { color: '#333' },
+              textStyle: { color: '#333', fontSize: 13 },
               enterable: true,
               triggerOn: 'mousemove|click',
               hideDelay: 1500,
               confine: true,
-              extraCssText: 'box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-radius: 8px; overflow: hidden; min-width: 220px; z-index: 9999; pointer-events: auto;',
+              extraCssText: 'box-shadow: 0 8px 30px rgba(0,0,0,0.25); border-radius: 10px; overflow: hidden; min-width: 220px; z-index: 9999; pointer-events: auto;',
               position: function (point, params, dom, rect, size) {
                 return [point[0] - size.viewSize[0] / 10, point[1] - size.contentSize[1] - 20];
               },
@@ -172,26 +179,26 @@ if (typeof echarts === 'undefined') {
                  if (params.seriesType !== 'effectScatter') return null;
                   const posts = params.data.posts;
                   if (!posts) return null;
-                  let html = `<div style="background: #409eff; color: #fff; padding: 12px 15px; font-weight: bold; font-size: 15px; border-bottom: 1px solid rgba(0,0,0,0.1);">${params.name} · ${posts.length} 篇文章</div>`;
+                  let html = `<div style="background: linear-gradient(135deg, #409eff, #2d6cdf); color: #fff; padding: 12px 15px; font-weight: bold; font-size: 15px;">${params.name} · ${posts.length} 篇文章</div>`;
                 html += `<div style="padding: 5px 0; max-height: 350px; overflow-y: auto;">`;
                 posts.forEach((post, index) => {
                   html += `<a href="${post.path}" class="footprint-post-link" style="display: block; padding: 12px 15px; color: #333; text-decoration: none; border-bottom: ${index === posts.length - 1 ? 'none' : '1px dotted #eee'}; transition: all 0.2s ease;">
                     <div style="font-weight: 600; font-size: 14px; margin-bottom: 5px; line-height: 1.4; color: #2c3e50;">${post.title}</div>
-                    <div style="font-size: 12px; color: #7f8c8d; display: flex; align-items: center;">
+                    <div style="font-size: 12px; color: #8899aa; display: flex; align-items: center;">
                       <span style="margin-right: 5px;">📅</span>${post.date}
                     </div>
                   </a>`;
                 });
                 html += `</div>`;
                 html += `<style>
-                  .footprint-post-link:hover { background: #ebf5ff !important; color: #409eff !important; transform: translateX(5px); }
-                  .footprint-post-link:hover div { color: #409eff !important; }
+                  .footprint-post-link:hover { background: #f0f6ff !important; color: #409eff !important; transform: translateX(5px); }
+                  .footprint-post-link:hover div:first-child { color: #409eff !important; }
                 </style>`;
                 return html;
               }
             },
-        geo: {
-          map: 'integrated', // 使用一体化地图
+geo: {
+          map: 'integrated',
           roam: true,
           zoom: 5,
           center: [105, 36],
@@ -212,19 +219,15 @@ if (typeof echarts === 'undefined') {
           },
           label: {
             show: true,
-            color: 'rgba(255, 255, 255, 0.4)',
+            color: 'rgba(180, 200, 230, 0.55)',
             fontSize: 10,
             formatter: (params) => {
-              // 统一处理省份和国家名字
               let name = params.name;
-              // 如果是主要国家
               const majorCountries = ['美国', '俄罗斯', '加拿大', '英国', '法国', '德国', '日本', '韩国', '澳大利亚', '巴西', '印度', '新加坡', '泰国', '越南'];
               if (majorCountries.includes(name)) return name;
-              // 如果是中国省份（通过 adcode 或特定后缀判断，也可以直接处理）
               if (params.data && params.data.properties && params.data.properties.level === 'province') {
                  return name.replace('省', '').replace('市', '').replace('自治区', '').replace('特别行政区', '');
               }
-              // 处理 china.json 中的省份名
               const provinces = ['北京','天津','上海','重庆','河北','山西','辽宁','吉林','黑龙江','江苏','浙江','安徽','福建','江西','山东','河南','湖北','湖南','广东','海南','四川','贵州','云南','陕西','甘肃','青海','台湾','内蒙古','广西','西藏','宁夏','新疆','香港','澳门'];
               for(let p of provinces) {
                 if(name.includes(p)) return p;
@@ -233,28 +236,28 @@ if (typeof echarts === 'undefined') {
             }
           },
           emphasis: {
-            itemStyle: { areaColor: '#1a2b4d' },
+            itemStyle: { areaColor: '#1e3050', borderColor: '#4a80c0', borderWidth: 1.5 },
             label: {
               show: true,
-              color: 'rgba(255, 255, 255, 0.4)',
+              color: 'rgba(220, 235, 255, 0.7)',
               fontSize: 10
             }
           },
           select: {
-            itemStyle: { areaColor: '#2c4a8d' },
+            itemStyle: { areaColor: '#254070' },
             label: {
               show: true,
-              color: 'rgba(255, 255, 255, 0.4)',
+              color: 'rgba(220, 235, 255, 0.7)',
               fontSize: 10
             }
           },
           itemStyle: {
-            areaColor: '#101c3d',
-            borderColor: '#213a7a',
+            areaColor: '#0e1a33',
+            borderColor: '#1c3560',
             borderWidth: 1
           }
         },
-        series: [
+series: [
           {
             name: '足迹',
             type: 'effectScatter',
@@ -263,35 +266,50 @@ if (typeof echarts === 'undefined') {
             tooltip: { show: true },
             cursor: 'pointer',
             symbolSize: function(val) {
-              return 8 + Math.min(val[2] * 2, 15);
+              return 10 + Math.min(val[2] * 3, 18);
             },
             showEffectOn: 'render',
             rippleEffect: {
-              brushType: 'fill',
-              scale: 3,
-              period: 4
+              brushType: 'stroke',
+              scale: 4,
+              period: 5
             },
-            emphasis: { scale: true },
+            emphasis: {
+              scale: 2.5,
+              itemStyle: {
+                shadowBlur: 20,
+                shadowColor: '#ffd700'
+              }
+            },
             label: {
               formatter: '{b}',
               position: 'right',
               show: true,
-              color: '#fff',
+              color: '#dde8ff',
               fontSize: 12,
-              textShadowBlur: 2,
+              fontWeight: 500,
+              textShadowBlur: 4,
               textShadowColor: '#000'
             },
             itemStyle: {
-              color: '#00f2ff',
-              shadowBlur: 10,
-              shadowColor: '#00f2ff'
+              color: '#00e5ff',
+              shadowBlur: 12,
+              shadowColor: 'rgba(0, 229, 255, 0.6)'
             },
             z: 5
           }
-        ]
-      };
+        ]      };
 
       chart.setOption(option);
+
+      // 统计信息
+      var statsEl = document.getElementById('map-stats');
+      if (statsEl && data.length > 0) {
+        var totalCities = data.length;
+        var totalPosts = data.reduce(function(s, d) { return s + d.value[2]; }, 0);
+        statsEl.innerHTML = '<span style="color: rgba(180,200,230,0.7); font-size: 13px;"><span style="color: #00e5ff; font-weight: 600;">' + totalCities + '</span> 座城市</span><span style="margin: 0 16px; color: rgba(180,200,230,0.3);">|</span><span style="color: rgba(180,200,230,0.7); font-size: 13px;"><span style="color: #00e5ff; font-weight: 600;">' + totalPosts + '</span> 篇文章</span>';
+        statsEl.style.display = 'flex';
+      }
 
       window.addEventListener('resize', () => chart.resize());
     }).catch(err => {
