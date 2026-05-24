@@ -89,20 +89,37 @@ if (typeof echarts === 'undefined') {
     const chart = echarts.init(container);
 
     // 加载本地 world.json, china.json 和 data.json
+    var CACHE_PREFIX = 'fp_';
+    var CACHE_VERSION = 'v1';
+    var CACHE_TTL = 7 * 24 * 60 * 60 * 1000;
+
+    function fetchWithCache(url) {
+      var key = CACHE_PREFIX + CACHE_VERSION + '_' + url;
+      var cached = localStorage.getItem(key);
+      if (cached) {
+        try {
+          var data = JSON.parse(cached);
+          if (data._ts && Date.now() - data._ts < CACHE_TTL) {
+            return Promise.resolve(data._payload);
+          }
+        } catch(e) {}
+      }
+      return fetch(url).then(function(res) {
+        if (!res.ok) throw new Error(url + ' not found');
+        return res.json();
+      }).then(function(json) {
+        try {
+          localStorage.setItem(key, JSON.stringify({_ts: Date.now(), _payload: json}));
+        } catch(e) {}
+        return json;
+      });
+    }
+
     Promise.all([
-      fetch('./world.json').then(res => {
-        if (!res.ok) throw new Error('world.json not found');
-        return res.json();
-      }),
-      fetch('./china.json').then(res => {
-        if (!res.ok) throw new Error('china.json not found');
-        return res.json();
-      }),
-      fetch('./data.json').then(res => {
-        if (!res.ok) throw new Error('data.json not found');
-        return res.json();
-      })
-    ]).then(([worldJson, chinaJson, footprints]) => {
+      fetchWithCache('./world.json'),
+      fetchWithCache('./china.json'),
+      fetchWithCache('./data.json')
+    ]).then(function([worldJson, chinaJson, footprints]) {
       loading.style.display = 'none';
 
       // 核心：动态合并地图数据，实现真正的一体化
