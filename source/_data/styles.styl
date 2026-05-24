@@ -1,0 +1,231 @@
+/* 自定义“阅读全文”按钮样式 */
+.post-button {
+  margin-top: 30px; /* 距离上方文字的距离 */
+  text-align: center; /* 按钮居中，如果你喜欢居左可以删掉这行 */
+}
+
+.post-button .btn {
+  background: #fff; /* 按钮背景颜色 */
+  color: #333;      /* 按钮文字颜色 */
+  font-size: 14px;  /* 字体大小 */
+  border: 2px solid #333; /* 边框 */
+  border-radius: 20px;    /* 圆角，数值越大按钮越圆 */
+  padding: 5px 20px;      /* 按钮内边距（上下 左右） */
+  transition: all 0.3s;   /* 动画过渡时间 */
+}
+
+/* 鼠标划过按钮时的效果 */
+.post-button .btn:hover {
+  background: #333;    /* 划过时背景变白 */
+  color: #fff;         /* 划过时文字变黑 */
+  border-color: #333;  /* 边框颜色保持 */
+  text-decoration: none;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* 增加一点阴影感 */
+}
+/* ===== 松霖小屋 · 极简雪山风 + 打字机动画方案 ===== */
+
+/* 1. 紧凑背景区域：恢复原版大小 */
+.site-brand-container, .site-meta {
+  background: url('/images/sidebar-bg.webp') no-repeat center center !important;
+  background-size: cover !important;
+  padding: 25px 15px !important; /* 进一步调小，接近原版高度 */
+  position: relative;
+  overflow: hidden;
+}
+
+.site-meta {
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* 2. 标题文字 & 打字机效果 */
+.site-title {
+  position: relative;
+  z-index: 1;
+  /* 更改为思源宋体，若未加载则回退到衬线体 */
+  font-family: "Noto Serif SC", serif !important;
+  font-size: 20px; 
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #fff !important;
+  
+  /* --- 打字机动画核心 --- */
+  display: inline-block;
+  white-space: nowrap;      
+  overflow: hidden;         
+  border-right: 2px solid rgba(255,255,255,0.75); /* 柔和的光标 */
+  
+  width: 0; 
+  /* steps(4) 对应“松霖小屋”四个字，3s 是动画总时长 */
+  animation: 
+    typing 3s steps(4, end) forwards, 
+    blink-caret .75s step-end infinite;
+}
+
+/* 打字动画：宽度从 0 到 100% */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* 光标闪烁动画 */
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: #fff; }
+}
+
+/* 3. 副标题优化 (可选) */
+.site-subtitle {
+  position: relative;
+  z-index: 1;
+  color: rgba(255,255,255,0.8) !important;
+}
+
+/* ===== 点赞功能样式 ===== */
+.post-like-section {
+  text-align: center;
+  margin: 40px 0 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.post-like-button {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  outline: none;
+  user-select: none;
+}
+
+.post-like-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.post-like-button .fa-heart {
+  color: #666;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+.post-like-button.is-liked .fa-heart {
+  color: #ff4d4d;
+  animation: heartBeat 0.6s ease;
+}
+
+.like-count {
+  font-size: 16px;
+  font-weight: 600;
+  color: #444;
+  min-width: 20px;
+}
+
+.post-like-button.is-liked .like-count {
+  color: #ff4d4d;
+}
+
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.3); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+html, body {
+  overflow-x: hidden;                     /* 严禁左右滑动 */
+  width: 100%;
+}
+
+body {
+  background: url('/images/body-bg.webp') no-repeat center center fixed;
+  background-size: cover;                 /* 背景自动缩放铺满全屏 */
+  -webkit-backface-visibility: hidden;    /* 增强固定背景稳定性 */
+}
+
+/* 可选：为了防止背景图太乱影响阅读，给内容区加一个半透明白底 */
+.main-inner {
+  background: rgba(255, 255, 255, 0.9);  /* 0.9 是不透明度，数值越小越透明 */
+  padding: 40px;                         /* 内容区内边距 */
+  border-radius: 10px;                   /* 圆角效果 */
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);  /* 淡淡的阴影，增加层次感 */
+}
+/* 仅针对手机端 (屏幕宽度小于 767px) */
+@media (max-width: 767px) {
+
+  /* 1. 彻底去掉背景图和背景颜色，统一为纯白 */
+  body {
+    background: #ffffff !important;
+    background-image: none !important;
+  }
+
+  /* 2. 去掉卡片效果，将宽度推向极致 */
+  .post-block {
+    margin: 0 !important;         /* 彻底去掉外边距 */
+    padding: 20px 15px !important; /* 仅留内部左右 15px 的呼吸感，防止文字贴边 */
+    width: 100% !important;        /* 宽度 100% */
+    background: transparent !important; /* 去掉卡片背景色 */
+    box-shadow: none !important;    /* 彻底去掉阴影 */
+    border-radius: 0 !important;    /* 去掉圆角 */
+    border-bottom: 1px solid #eee;  /* 用极细的线条优雅地分隔文章 */
+  }
+
+  /* 3. 头部导航区域背景同步为白色 */
+  .header, .header-inner, .main-inner {
+    background: #ffffff !important;
+    width: 100% !important;
+  }
+
+  /* 4. 标题左对齐，去掉多余的装饰 */
+  .post-title {
+    font-size: 1.3rem !important; /* 标题稍微放大 */
+    text-align: left !important;
+    margin: 10px 0 !important;
+    font-weight: bold;
+    color: #222;
+  }
+
+  /* 5. 元数据（日期/分类）精简 */
+  .post-meta {
+    justify-content: flex-start !important;
+    font-size: 0.75rem !important;
+    color: #999;
+    margin-bottom: 15px !important;
+  }
+
+  /* 6. 文章内容排版 */
+  .post-body {
+    line-height: 1.8;
+    font-size: 16px;
+    color: #333;
+    text-align: justify;
+  }
+
+  /* 7. 隐藏 NexT 默认的文章分割虚线 */
+  .posts-expand .post-eof {
+    display: none !important;
+  }
+
+  /* 8. “阅读全文”按钮优化为文本链接感 */
+  .post-button {
+    text-align: left;
+    margin-top: 20px;
+  }
+  .post-button .btn {
+    border: none !important;      /* 去掉边框 */
+    padding: 0 !important;        /* 去掉内边距 */
+    background: none !important;
+    color: #007aff !important;    /* 使用链接蓝 */
+    font-weight: 500;
+  }
+}
