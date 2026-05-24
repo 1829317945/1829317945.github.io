@@ -1222,7 +1222,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #39ffde;
+    background: #ebf4c1;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2794,6 +2794,9 @@ header.header {
 .post-like-button.is-liked .fa-heart {
   color: #ff4d4d;
   animation: heartBeat 0.6s ease;
+}
+.post-like-button.is-liked {
+  cursor: default;
 }
 .like-count {
   font-size: 16px;
