@@ -97,7 +97,7 @@ if (typeof echarts === 'undefined') {
 
     // 加载本地 world.json, china.json 和 data.json
     var CACHE_PREFIX = 'fp_';
-    var CACHE_VERSION = 'v1';
+    var CACHE_VERSION = 'v2';
     var CACHE_TTL = 7 * 24 * 60 * 60 * 1000;
 
     function fetchWithCache(url) {
