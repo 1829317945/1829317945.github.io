@@ -296,6 +296,7 @@ body {
     radial-gradient(ellipse at 20% 50%, rgba(139, 119, 90, 0.15) 0%, transparent 60%),
     radial-gradient(ellipse at 80% 50%, rgba(139, 119, 90, 0.1) 0%, transparent 60%),
     linear-gradient(180deg, #f7efe0 0%, #f0e4ce 30%, #e8d9be 70%, #f2e8d5 100%);
+  visibility: visible !important;
   overflow: hidden;
 }
 
@@ -384,6 +385,19 @@ body {
   font-style: italic;
 }
 
+.gate-question-area {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.gate-question-text {
+  font-size: 24px;
+  line-height: 1.8;
+  color: #3d3226;
+  letter-spacing: 2px;
+  font-family: "Noto Serif SC", "KaiTi", "STKaiti", serif;
+}
+
 .gate-input-area {
   display: flex;
   align-items: center;
@@ -392,7 +406,7 @@ body {
 }
 
 .gate-input {
-  width: 120px;
+  width: 160px;
   height: 48px;
   border: 2px solid #8b775a;
   background: rgba(255, 255, 255, 0.6);
@@ -485,7 +499,7 @@ body {
     min-width: 48px;
   }
   .gate-input {
-    width: 100px;
+    width: 130px;
     height: 42px;
     font-size: 18px;
   }
@@ -498,6 +512,9 @@ body {
     width: 64px;
     height: 64px;
     font-size: 16px;
+  }
+  .gate-question-text {
+    font-size: 20px;
   }
 }
 @media (max-width: 767px) {
