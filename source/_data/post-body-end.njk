@@ -19,7 +19,6 @@
   const getUrl = 'https://api.countapi.xyz/get/' + namespace + '/' + pagePath;
   const hitUrl = 'https://api.countapi.xyz/hit/' + namespace + '/' + pagePath;
 
-  // 页面加载时获取真实点赞数
   fetch(getUrl)
     .then(function(res) { return res.json(); })
     .then(function(data) {
@@ -29,15 +28,13 @@
       countSpan.innerText = 0;
     });
 
-  // 恢复已点赞状态
   if (localStorage.getItem(storageKey)) {
     likeBtn.classList.add('is-liked');
     heartIcon.classList.replace('far', 'fas');
   }
 
-  // 点击逻辑：只能点赞，不能取消
   likeBtn.onclick = function() {
-    if (localStorage.getItem(storageKey)) return; // 已点赞，忽略
+    if (localStorage.getItem(storageKey)) return;
 
     likeBtn.classList.add('is-liked');
     heartIcon.classList.replace('far', 'fas');
@@ -54,3 +51,12 @@
   };
 })();
 </script>
+
+{% if post %}
+<div class="random-posts">
+  <div class="random-posts-title"><i class="fas fa-dice-d6"></i> 随便看看</div>
+  <div class="random-posts-list">
+    {{ random_post_links(post.path, 3) }}
+  </div>
+</div>
+{% endif %}

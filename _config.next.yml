@@ -263,7 +263,7 @@ post_meta:
 # Dependencies: https://github.com/next-theme/hexo-word-counter
 symbols_count_time:
   separated_meta: true
-  item_text_total: false
+  item_text_total: true
 
 # Use icon instead of the symbol # to indicate the tag at the bottom of the post
 tag_icon: false
@@ -393,14 +393,7 @@ back2top:
 
 # Reading progress bar
 reading_progress:
-  enable: false
-  # Available values: left | right
-  start_at: left
-  # Available values: top | bottom
-  position: top
-  reversed: false
-  color: "#37c6c0"
-  height: 3px
+  enable: true
 
 # Bookmark Support
 bookmark:
