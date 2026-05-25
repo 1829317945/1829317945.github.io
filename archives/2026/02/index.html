@@ -78,7 +78,202 @@
   <script class="next-config" data-name="quicklink" type="application/json">{"enable":false,"home":true,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"http://example.com/archives/2026/02/"}</script>
   <script src="/js/third-party/quicklink.js" defer></script>
 <!-- 引入 思源宋体 (更显稳重文艺) -->
-<link rel="stylesheet" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap">
+
+<!-- Gate: Critical hiding CSS (inline for synchronous application before body renders) -->
+<style id="blog-gate-critical-css">
+  html.blog-gate-locked body > :not(#blog-gate-overlay) {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  html.blog-gate-locked {
+    overflow: hidden;
+  }
+</style>
+
+<!-- Gate: Core logic (synchronous, before body renders) -->
+<script>
+(function() {
+  var STORAGE_KEY = 'blog_gate_unlocked';
+
+  if (localStorage.getItem(STORAGE_KEY)) return;
+
+  document.documentElement.classList.add('blog-gate-locked');
+
+  var QUESTIONS = [
+    { before: '床前明月光，', after: '地上霜。', answer: '疑是', source: '李白《静夜思》', hint: '二字，表示彷佛、怀疑' },
+    { before: '举头望明月，', after: '故乡。', answer: '低头思', source: '李白《静夜思》', hint: '三字，与"举头"相对的动作' },
+    { before: '白日依山尽，黄河', after: '海流。', answer: '入', source: '王之涣《登鹳雀楼》', hint: '一字，表示流进、汇入' },
+    { before: '欲穷千里目，更上', after: '层楼。', answer: '一', source: '王之涣《登鹳雀楼》', hint: '一字，数词' },
+    { before: '春眠不觉晓，处处闻', after: '鸟。', answer: '啼', source: '孟浩然《春晓》', hint: '一字，鸟的叫声' },
+    { before: '夜来风雨声，花落知', after: '少。', answer: '多', source: '孟浩然《春晓》', hint: '一字，表示数量' },
+    { before: '大漠孤烟直，长河', after: '日圆。', answer: '落', source: '王维《使至塞上》', hint: '一字，太阳下沉的动作' },
+    { before: '海内存知己，天涯若', after: '邻。', answer: '比', source: '王勃《送杜少府之任蜀州》', hint: '一字，表示靠近、相比' },
+    { before: '独在异乡为异客，每逢', after: '节倍思亲。', answer: '佳', source: '王维《九月九日忆山东兄弟》', hint: '一字，美好的' },
+    { before: '两岸猿声啼不住，轻舟已过', after: '重山。', answer: '万', source: '李白《早发白帝城》', hint: '一字，表示极多' },
+    { before: '飞流直下三千尺，疑是银河', after: '九天。', answer: '落', source: '李白《望庐山瀑布》', hint: '一字，从高处到低处' },
+    { before: '窗含西岭千秋雪，门泊东吴', after: '里船。', answer: '万', source: '杜甫《绝句》', hint: '一字，表示路途遥远' },
+    { before: '停车坐爱枫林晚，霜叶红于', after: '月花。', answer: '二', source: '杜牧《山行》', hint: '一字，农历月份' },
+    { before: '春风又绿江南岸，明月何时照', after: '还？', answer: '我', source: '王安石《泊船瓜洲》', hint: '一字，第一人称代词' },
+    { before: '人生自古谁无死，留取丹心照', after: '青。', answer: '汗', source: '文天祥《过零丁洋》', hint: '一字，与"青"组成史册的代称' },
+    { before: '但愿人长久，千里共', after: '娟。', answer: '婵', source: '苏轼《水调歌头》', hint: '一字，形容月色美好' },
+    { before: '不识庐山真面目，只缘身在', after: '山中。', answer: '此', source: '苏轼《题西林壁》', hint: '一字，指示代词' },
+    { before: '山重水复疑无路，柳暗花明', after: '一村。', answer: '又', source: '陆游《游山西村》', hint: '一字，表示再次、转折' },
+    { before: '接天莲叶无穷碧，映日荷花', after: '样红。', answer: '别', source: '杨万里《晓出净慈寺送林子方》', hint: '一字，表示特别、不同' },
+    { before: '等闲识得东风面，万紫千红', after: '是春。', answer: '总', source: '朱熹《春日》', hint: '一字，表示始终、全都' }
+  ];
+
+  var question = QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
+
+  function escapeHTML(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
+  function buildOverlay() {
+    var overlay = document.createElement('div');
+    overlay.id = 'blog-gate-overlay';
+    overlay.innerHTML = [
+      '<div class="gate-container">',
+        '<div class="gate-seal-top">',
+          '<div class="gate-chop">诗词密钥</div>',
+        '</div>',
+        '<div class="gate-poem-area">',
+          '<div class="gate-poem-line">',
+            '<span class="gate-poem-before">' + escapeHTML(question.before) + '</span>',
+            '<span class="gate-poem-blank" id="gate-blank">____</span>',
+            '<span class="gate-poem-after">' + escapeHTML(question.after) + '</span>',
+          '</div>',
+          '<div class="gate-poem-source">—— ' + escapeHTML(question.source) + '</div>',
+        '</div>',
+        '<div class="gate-input-area">',
+          '<input type="text" class="gate-input" id="gate-answer-input" placeholder="?" maxlength="4" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">',
+          '<button class="gate-submit" id="gate-submit-btn">破 印</button>',
+        '</div>',
+        '<div class="gate-hint">',
+          '<span class="gate-hint-text" id="gate-hint-text">请输入缺失的字词</span>',
+        '</div>',
+        '<div class="gate-footer">诗 词 密 钥</div>',
+      '</div>'
+    ].join('');
+
+    document.body.insertBefore(overlay, document.body.firstChild);
+
+    var hintText = document.getElementById('gate-hint-text');
+    hintText.classList.add('is-visible');
+
+    var input = document.getElementById('gate-answer-input');
+    var submitBtn = document.getElementById('gate-submit-btn');
+    var blankSpan = document.getElementById('gate-blank');
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') checkAnswer();
+    });
+    submitBtn.addEventListener('click', checkAnswer);
+    setTimeout(function() { input.focus(); }, 400);
+
+    function checkAnswer() {
+      var userAnswer = input.value.trim().replace(/\s+/g, '');
+      var correctAnswer = question.answer.replace(/\s+/g, '');
+
+      if (userAnswer === correctAnswer) {
+        onCorrect(input.value.trim());
+      } else {
+        onWrong();
+      }
+    }
+
+    function onCorrect(userAnswer) {
+      input.disabled = true;
+      submitBtn.disabled = true;
+      blankSpan.textContent = userAnswer;
+      blankSpan.classList.add('is-filled');
+      hintText.textContent = '答对了！封印解除……';
+      hintText.classList.remove('is-wrong');
+      hintText.classList.add('is-visible');
+
+      if (window.anime) {
+        var chop = document.querySelector('.gate-chop');
+        anime({
+          targets: chop,
+          rotate: [0, 15, -10, 5, 0],
+          scale: [1, 1.3, 0.9, 1.1, 1],
+          borderColor: ['#c41e3a', '#ff6b6b', '#c41e3a'],
+          duration: 800,
+          easing: 'easeInOutQuad',
+          complete: function() {
+            var flash = document.createElement('div');
+            flash.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;' +
+              'background:radial-gradient(circle,rgba(255,240,200,0.9),rgba(255,220,150,0.6));' +
+              'z-index:2147483646;pointer-events:none;opacity:0;';
+            document.body.appendChild(flash);
+
+            anime({
+              targets: flash,
+              opacity: [0, 0.8, 0],
+              duration: 1200,
+              easing: 'easeOutExpo',
+              complete: function() {
+                flash.remove();
+                anime({
+                  targets: overlay,
+                  opacity: [1, 0],
+                  translateY: [0, -30],
+                  duration: 800,
+                  easing: 'easeInOutQuad',
+                  complete: finishUnlock
+                });
+              }
+            });
+          }
+        });
+      } else {
+        overlay.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        overlay.style.opacity = '0';
+        overlay.style.transform = 'translateY(-30px)';
+        setTimeout(finishUnlock, 800);
+      }
+    }
+
+    function onWrong() {
+      input.classList.add('is-wrong');
+      setTimeout(function() { input.classList.remove('is-wrong'); }, 500);
+      hintText.textContent = question.hint;
+      hintText.classList.add('is-wrong', 'is-visible');
+      input.value = '';
+      input.focus();
+    }
+
+    function finishUnlock() {
+      try { localStorage.setItem(STORAGE_KEY, '1'); } catch(e) {}
+      if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+      document.documentElement.classList.remove('blog-gate-locked');
+      var criticalCSS = document.getElementById('blog-gate-critical-css');
+      if (criticalCSS) criticalCSS.parentNode.removeChild(criticalCSS);
+
+      // Re-trigger NexT motion if body was hidden during its initial run
+      if (window.NexT && window.NexT.boot && window.NexT.boot.motion) {
+        setTimeout(function() {
+          var body = document.body;
+          if (body.classList.contains('use-motion')) {
+            body.classList.remove('use-motion');
+            void body.offsetWidth;
+            body.classList.add('use-motion');
+            NexT.boot.motion();
+          }
+        }, 100);
+      }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', buildOverlay);
+  } else {
+    buildOverlay();
+  }
+})();
+</script>
 
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
