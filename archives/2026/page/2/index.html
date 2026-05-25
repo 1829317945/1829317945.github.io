@@ -106,6 +106,7 @@
       <h1 class="site-title">松霖小屋</h1>
       <i class="logo-line"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">慢慢走，欣赏啊！</p>
   </div>
 
   <div class="site-nav-right">
@@ -294,10 +295,82 @@
       <i class="fa fa-heart"></i>
     </span>
     <span class="author" itemprop="copyrightHolder">Du Yansong</span>
-  </div><div style="font-size: 12px; color: #888; margin-top: 5px;">
-遇事不决 可问春风 春风不语 既随本心
   </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">17k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:03</span>
+  </span>
+</div><div style="font-size: 12px; color: #888; margin-top: 5px;">
+遇事不决 可问春风 春风不语 既随本心
+</div>
+<div style="font-size: 12px; color: #999; margin-top: 6px;">
+<span id="footer-quote" style="font-style: italic;"></span>
+</div>
+<div style="font-size: 11px; color: #aaa; margin-top: 4px;">
+<span id="footer-uptime"></span>
+</div>
+<script>
+(function(){
+  var quotes = [
+    '人生如逆旅，我亦是行人。 ——苏轼《临江仙》',
+    '此心安处是吾乡。 ——苏轼《定风波》',
+    '且将新火试新茶，诗酒趁年华。 ——苏轼《望江南》',
+    '竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。 ——苏轼《定风波》',
+    '人生到处知何似，应似飞鸿踏雪泥。 ——苏轼《和子由渑池怀旧》',
+    '行到水穷处，坐看云起时。 ——王维《终南别业》',
+    '采菊东篱下，悠然见南山。 ——陶渊明《饮酒》',
+    '仰天大笑出门去，我辈岂是蓬蒿人。 ——李白《南陵别儿童入京》',
+    '长风破浪会有时，直挂云帆济沧海。 ——李白《行路难》',
+    '莫愁前路无知己，天下谁人不识君。 ——高适《别董大》',
+    '山重水复疑无路，柳暗花明又一村。 ——陆游《游山西村》',
+    '纸上得来终觉浅，绝知此事要躬行。 ——陆游《冬夜读书示子聿》',
+    '问渠那得清如许，为有源头活水来。 ——朱熹《观书有感》',
+    '世事洞明皆学问，人情练达即文章。 ——曹雪芹《红楼梦》',
+    '人生若只如初见，何事秋风悲画扇。 ——纳兰性德《木兰花令》',
+    '宠辱不惊，看庭前花开花落；去留无意，望天上云卷云舒。 ——《菜根谭》',
+    '慢慢走，欣赏啊！ ——朱光潜《谈美》',
+    '满地都是六便士，他却抬头看见了月亮。 ——毛姆《月亮与六便士》',
+    '世界以痛吻我，要我报之以歌。 ——泰戈尔《飞鸟集》',
+    '一个人知道自己为什么而活，就可以忍受任何一种生活。 ——尼采'
+  ];
+  var el = document.getElementById('footer-quote');
+  if (el) {
+    el.textContent = quotes[Math.floor(Math.random() * quotes.length)];
+  }
 
+  var uptimeEl = document.getElementById('footer-uptime');
+  if (uptimeEl) {
+    var start = new Date('2026-02-01');
+    var days = Math.floor((Date.now() - start.getTime()) / 86400000);
+    uptimeEl.textContent = '本站已默默运行了 ' + days + ' 天';
+  }
+
+  var subtitleEl = document.querySelector('.site-subtitle');
+  if (subtitleEl) {
+    var subtitles = [
+      '慢慢走，欣赏啊！',
+      '读万卷书，行万里路',
+      '山高路远，看世界，也找自己',
+      '身体和灵魂，总有一个在路上',
+      '人生是旷野，不是轨道',
+      '保持热爱，奔赴山海',
+      '世界那么大，我想去看看'
+    ];
+    subtitleEl.textContent = subtitles[Math.floor(Math.random() * subtitles.length)];
+  }
+})();
+</script>
 
     </div>
   </footer>
@@ -313,6 +386,7 @@
     <i class="fa fa-arrow-up fa-lg"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
